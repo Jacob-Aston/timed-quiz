@@ -1,13 +1,13 @@
-var countdown = 10;
+var countdown = 13;
 
 //https://theprogrammingexpert.com/javascript-countdown-timer/
 const timero = function() {
 var timer = setInterval(function() {
     document.getElementById('time').innerHTML = "<b>" + countdown + "</b>";
     countdown--
-    if(countdown == 0){
-        document.getElementById('time').innerHTML = "";
+    if(countdown == -1){
         clearInterval(timer)
+        // document.getElementById('time').innerHTML = "";
     }
 
     
@@ -15,13 +15,13 @@ var timer = setInterval(function() {
 }
 
 
-const initButton = () => {
+const initButton = (hide) => {
     const element = document.getElementById('start-btn');
     element.addEventListener("click",  function() {
-        document.getElementsByClassName("question").classList.remove("hide");
-        document.getElementsByClassName("question-box").classList.remove("hide");
-        countdown = 12;
         timero();
+        document.getElementById("question").classList.remove("hide");
+        document.getElementById("question-box").classList.remove("hide");
+        document.getElementById("start-btn").classList.add("hide");
     });
 }
 
