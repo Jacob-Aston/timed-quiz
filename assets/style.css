@@ -6,6 +6,7 @@ header {
     background-color: beige ;
 }
 
+
 .container {
     display: flex;
     width: 80%;
@@ -26,4 +27,8 @@ header {
 }
 .btn {
     box-sizing: border-box;
+}
+
+.hide {
+    display: none;
 }
