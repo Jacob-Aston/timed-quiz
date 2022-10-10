@@ -1,22 +1,17 @@
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
+const initButton = () => {
+    const element = document.getElementById('start-btn');
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+    console.log('hi');
 
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            timer = duration;
-        }
-    }, 1000);
+    element.addEventListener("click",  function() {
+        console.log('howdy');
+    });
 }
 
-window.onload = function () {
-    var fiveMinutes = 60 * 5,
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
-};
+const init = () => {
+ initButton();
+
+}
+
+window.onload = init;
+
