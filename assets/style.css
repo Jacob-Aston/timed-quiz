@@ -17,16 +17,18 @@ header {
     height: 500px;
     width: 100vw;
 }
+
 .question-box {
     display: grid;
     background-color: grey;
     grid-template-columns: auto auto;
     height: 300px;
-    width: 250px;
-    gap: 20px;
+    width: 300px;
 }
+
 .btn {
     box-sizing: border-box;
+    margin: 20px;
 }
 
 .hide {
