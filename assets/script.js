@@ -1,10 +1,5 @@
 var countdown = 13;
-const startBtn = document.getElementById("start-btn");
-const questionEl = document.getElementById("question");
-const questionBox = document.getElementById("question-box");
-const answerBtn = document.getElementsByClassName('answer-btn');
-let shuffledQuestions, currentQuestionIndex;
-
+const quiz = document.getElementById("quiz");
 //https://theprogrammingexpert.com/javascript-countdown-timer/
 const timero = function () {
   var timer = setInterval(function () {
@@ -17,52 +12,95 @@ const timero = function () {
   }, 1000);
 };
 
-//Starts timer, hides start, shows questions
-const initButton = () => {
-  startBtn.addEventListener("click", function () {
-    questionEl.classList.remove("hide");
-    questionBox.classList.remove("hide");
-    startBtn.classList.add("hide");
-    timero();
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
-    presentQuestion(questions[questionIndex]);
-  });
-};
-
 const questions = [
   {
     prompt: "question 1",
     answers: [
-        {text: '1', correct: true},
-        {text: '2', correct: false},
-        {text: '3', correct: false},
-        {text: '4', correct: false}
+      { text: "1", correct: true },
+      { text: "2", correct: false },
+      { text: "3", correct: false },
+      { text: "4", correct: false },
     ],
-    correctIndex: 1,
   },
   {
     prompt: "question 2",
-    answers: ["Answer2", "Answer2", "Answer3", "Answer4"],
-    correctIndex: 1,
+    answers: [
+      { text: "1", correct: true },
+      { text: "2", correct: false },
+      { text: "3", correct: false },
+      { text: "4", correct: false },
+    ],
+  },
+  {
+    prompt: "question 3",
+    answers: [
+      { text: "1", correct: true },
+      { text: "2", correct: false },
+      { text: "3", correct: false },
+      { text: "4", correct: false },
+    ],
   },
 ];
 
-//Changes question and answers text.
-const presentQuestion = (questions) => {
-  questionEl.innerText = questions.prompt;
-  document.getElementById("answer1").innerText = questions.answers[0];
-  document.getElementById("answer2").innerText = questions.answers[1];
-  document.getElementById("answer3").innerText = questions.answers[2];
-  document.getElementById("answer4").innerText = questions.answers[3];
-  answerBtn.addEventListener("click", selectAnswer());
+//generates start button
+const addStartButton = () => {
+  let btn = document.createElement("button");
+  btn.innerHTML = "start";
+  btn.classList.add("start-btn");
+  quiz.append(btn);
 };
 
-const selectAnswer = () => {}
-
-//Function to initialize page.
+//Displays start button on page load
 const init = () => {
-  initButton();
+  addStartButton();
 };
 
-//Runs initialization function upon page load.
-window.onload = init;
+const addAnswers = () => {
+  let ans = questions[0].answers;
+  let questionBox = document.getElementById("question-box");
+  console.log(ans);
+  for (let i = 0; i < ans.length; i++) {
+    let ansEl = document.createElement("div");
+    ansEl.setAttribute("class", "answer");
+    ansEl.innerHTML = ans[i].text;
+    questionBox.append(ansEl);
+  }
+};
+
+const addQuestions = () => {
+  let questionBox = document.createElement("div");
+  let questionEl = document.createElement("h2");
+  questionEl.innerHTML = questions[0].prompt;
+  questionBox.setAttribute("id", "question-box");
+  questionBox.append(questionEl);
+  quiz.append(questionBox);
+};
+
+const addTimer = () => {
+  let timeEl = document.createElement("div");
+  timeEl.setAttribute("id", "time");
+  quiz.append(timeEl);
+};
+
+const clickAnswer = (event) => {
+  let target = event.target;
+  console.log(target);
+};
+
+const startQuiz = () => {
+  addTimer();
+  addQuestions();
+  addAnswers();
+  timero();
+};
+
+quiz.addEventListener("click", function (event) {
+  let target = event.target;
+  let targetClass = event.target.classList.value;
+  if (targetClass == "start-btn") {
+    target.classList.add("hide");
+    startQuiz();
+  }
+});
+
+window.onload = init();
