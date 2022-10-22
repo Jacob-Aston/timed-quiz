@@ -63,14 +63,21 @@ const init = () => {
   addStartButton();
 };
 
-//generates and adds a question box div with a question element child
+const addNameForm = () => {
+  let nameForm = document.createElement('form')
+  nameForm.innerHTML = (`
+  <input type='text'></input>
+  <button type='submit' class='submit-btn'></button>`)
+  quiz.append(nameForm);
+}
 
 const endQuiz = () => {
   console.log('end')
   let scoreEl = document.createElement('div');
   scoreEl.setAttribute('class', "score")
-  scoreEl.innerHTML = countdown;
+  scoreEl.innerHTML = "score" + countdown;
   quiz.append(scoreEl);
+  addNameForm();
 }
 
 //generates and displays answer elements on question box
@@ -121,6 +128,7 @@ const addAnswers = () => {
   }
 };
 
+//generates and adds a question box div with a question element child
 const addQuestions = () => {
   let questionEl = document.createElement("h2");
   questionEl.innerHTML = questions[questionIndex].prompt;

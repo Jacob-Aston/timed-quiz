@@ -44,6 +44,12 @@ button {
   margin: 20px;
 }
 
+.submit-btn {
+  background-color: blue;
+  width:15px;
+  height: 15px;
+}
+
 .score {
   display: flex;
   box-sizing: border-box;
