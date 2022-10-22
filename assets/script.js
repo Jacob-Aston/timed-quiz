@@ -61,16 +61,16 @@ const init = () => {
 };
 
 //generates and adds a question box div with a question element child
-const addQuestions = () => {
-  let questionEl = document.createElement("h2");
-  questionEl.innerHTML = questions[questionIndex].prompt;
-  questionBox.append(questionEl);
-};
+
+const endQuiz = () => {
+  console.log('end')
+}
 
 //generates and displays answer elements on question box
 const addAnswers = () => {
   let ans = questions[questionIndex].answers;
   let questionBox = document.getElementById("question-box");
+  questionIndex ++;
   console.log(ans);
   for (let i = 0; i < ans.length; i++) {
     let ansEl = document.createElement("div");
@@ -96,11 +96,17 @@ const addAnswers = () => {
         countdown -= 5;
         //display incorrect
       }
+      if( questionIndex == questions.length) {
+        quiz.innerHTML = '';
+        endQuiz()
+        //stop timer
+      }
       //nextQuestion();
-      questionIndex ++;
-      questionBox.innerHTML = '';
-      addQuestions()
-      addAnswers()
+      if( questionIndex != questions.length) {
+        questionBox.innerHTML = '';
+        addQuestions()
+        addAnswers()
+      }
     });
     //grab content from individual div
     // progress index
@@ -108,6 +114,11 @@ const addAnswers = () => {
   }
 };
 
+const addQuestions = () => {
+  let questionEl = document.createElement("h2");
+  questionEl.innerHTML = questions[questionIndex].prompt;
+  questionBox.append(questionEl);
+};
 
 //adds a timer element to quiz
 const addTimer = () => {
