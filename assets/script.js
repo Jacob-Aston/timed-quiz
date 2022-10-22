@@ -14,6 +14,9 @@ const timero = function () {
       clearInterval(timer);
       // document.getElementById('time').innerHTML = "";
     }
+    if ( questionIndex == 3) {
+      clearInterval(timer);
+    }
   }, 1000);
 };
 
@@ -64,6 +67,10 @@ const init = () => {
 
 const endQuiz = () => {
   console.log('end')
+  let scoreEl = document.createElement('div');
+  scoreEl.setAttribute('class', "score")
+  scoreEl.innerHTML = countdown;
+  quiz.append(scoreEl);
 }
 
 //generates and displays answer elements on question box

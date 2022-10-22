@@ -44,6 +44,20 @@ button {
   margin: 20px;
 }
 
+.score {
+  display: flex;
+  box-sizing: border-box;
+  background-color: aqua;
+  border-radius: 10px;
+  justify-content: center;
+  width: 50px;
+}
+
+.name-submit-btn {
+  background-color: blue;
+  color: white;
+}
+
 .hide {
   display: none;
 }
