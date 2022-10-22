@@ -16,6 +16,11 @@ header {
   width: 100vw;
 }
 
+h2 {
+background-color: lightcoral;
+border-radius: 10px;
+}
+
 .answer {
   display: flex;
   width: 300px;
