@@ -1,6 +1,9 @@
 var countdown = 30;
 const quiz = document.getElementById("quiz");
-var questionBoxEl;
+var questionIndex = 0;
+let questionBox = document.createElement("div");
+questionBox.setAttribute("id", "question-box");
+quiz.append(questionBox);
 
 //https://theprogrammingexpert.com/javascript-countdown-timer/
 const timero = function () {
@@ -27,7 +30,7 @@ const questions = [
   {
     prompt: "question 2",
     answers: [
-      { id:"0", text: "1", correct: true },
+      { id:"0", text: "2", correct: true },
       { id:"1", text: "2", correct: false },
       { id:"2", text: "3", correct: false },
       { id:"3", text: "4", correct: false },
@@ -57,9 +60,16 @@ const init = () => {
   addStartButton();
 };
 
+//generates and adds a question box div with a question element child
+const addQuestions = () => {
+  let questionEl = document.createElement("h2");
+  questionEl.innerHTML = questions[questionIndex].prompt;
+  questionBox.append(questionEl);
+};
+
 //generates and displays answer elements on question box
 const addAnswers = () => {
-  let ans = questions[0].answers;
+  let ans = questions[questionIndex].answers;
   let questionBox = document.getElementById("question-box");
   console.log(ans);
   for (let i = 0; i < ans.length; i++) {
@@ -73,7 +83,7 @@ const addAnswers = () => {
       ansEl.dataset.correct = false;
     };
     questionBox.append(ansEl);
-
+    
     ansEl.addEventListener('click', function(e){
       const answer = e.target;
       const answerCorrect = answer.dataset.correct;
@@ -87,29 +97,23 @@ const addAnswers = () => {
         //display incorrect
       }
       //nextQuestion();
+      questionIndex ++;
+      questionBox.innerHTML = '';
+      addQuestions()
+      addAnswers()
     });
-    //add event listener here & console.log
     //grab content from individual div
     // progress index
     //correct check...
   }
 };
 
-//generates and adds a question box div with a question element child
-const addQuestions = () => {
-  let questionBox = document.createElement("div");
-  let questionEl = document.createElement("h2");
-  questionEl.innerHTML = questions[0].prompt;
-  questionBox.setAttribute("id", "question-box");
-  questionBox.append(questionEl);
-  quiz.append(questionBox);
-};
 
 //adds a timer element to quiz
 const addTimer = () => {
   let timeEl = document.createElement("div");
   timeEl.setAttribute("id", "time");
-  quiz.append(timeEl);
+  quiz.prepend(timeEl);
 };
 
 //adds timer el question box with question and answers. Also starts timer
@@ -118,12 +122,8 @@ const startQuiz = () => {
   addQuestions();
   addAnswers();
   timero();
-  // questionBoxEl = document.getElementById('question-box');
 };
 
-// questionBoxEl.addEventListener('click', function() {
-// console.log('click')
-// });
 //Starts quiz when start button is pressed
 quiz.addEventListener("click", function (event) {
   let target = event.target;
